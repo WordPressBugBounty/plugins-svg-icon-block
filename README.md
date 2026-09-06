@@ -1,0 +1,1 @@
+# plugins-svg-icon-block
