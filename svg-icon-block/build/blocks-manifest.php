@@ -5,15 +5,23 @@ return array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
 		'name' => 'svgib/svg',
-		'version' => '1.0.0',
+		'version' => '1.2.0',
 		'title' => 'SVG Icon',
 		'category' => 'media',
-		'description' => 'Display a SVG icon',
+		'description' => 'Add an icon from Font Awesome, your own SVG code, or an uploaded SVG file.',
+		'keywords' => array(
+			'icon',
+			'svg',
+			'font awesome',
+			'logo',
+			'symbol'
+		),
 		'supports' => array(
 			'html' => false,
 			'align' => false,
 			'className' => false,
-			'customClassName' => false
+			'customClassName' => true,
+			'anchor' => true
 		),
 		'example' => array(
 			

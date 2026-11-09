@@ -41,6 +41,7 @@ if ( ! class_exists( 'Svgib_Block_Loader' ) ) {
 			require_once trailingslashit( SVGIB_PLUGIN_DIR ) . '/inc/classes/register-blocks.php';
 			require_once trailingslashit( SVGIB_PLUGIN_DIR ) . '/inc/classes/dynamic-style.php';
 			require_once trailingslashit( SVGIB_PLUGIN_DIR ) . '/inc/classes/svg-sanitizer.php';
+			require_once trailingslashit( SVGIB_PLUGIN_DIR ) . '/inc/classes/svg-kses.php';
 			require_once trailingslashit( SVGIB_PLUGIN_DIR ) . '/inc/classes/svg-upload.php';
 			require_once trailingslashit( SVGIB_PLUGIN_DIR ) . '/inc/classes/my-icons.php';
 		}

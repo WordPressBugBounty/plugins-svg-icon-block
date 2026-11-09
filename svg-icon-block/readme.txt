@@ -3,7 +3,7 @@ Contributors: gkits, binsaifullah
 Tags: svg, svg icon, icon block, svg block, gutenberg
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -42,6 +42,18 @@ Every icon is sanitized before it is stored, using the same security checks appl
 
 
 == Changelog ==
+= 1.2.0 =
+* Fixed: Icons no longer vanish when saved by Authors, Contributors, or on Multisite (users without unfiltered HTML)
+* Fixed: Adding a background image no longer drops every other style of the block on the front end
+* Fixed: SVG code typed in the sidebar is now sanitized, and invalid markup no longer replaces the icon
+* Added: Alternative text for icons, with a warning for icon-only links that have no accessible name
+* Added: Additional CSS class and HTML anchor settings
+* Added: Popular icons in the block placeholder for one-click insert
+* Improved: Redesigned icon library, Custom SVG window, My Icons window and block placeholder
+* Improved: Removing a saved icon from My Icons now asks for confirmation, since the library is shared site-wide
+* Improved: Custom SVG window validates markup, previews on light, dark and transparent backgrounds, and accepts dropped .svg files
+* Improved: Font Awesome data loads only when needed, making the editor script about 88% smaller
+
 = 1.1.0 =
 * Added: My Icons library - save a custom SVG with "Add to My Icons" and reuse it in any block
 * Added: My Icons button in the block placeholder to pick a saved icon, with search and remove

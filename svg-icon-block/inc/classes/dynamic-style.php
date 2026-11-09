@@ -103,11 +103,20 @@ if ( ! class_exists( 'Svgib_Block_Dynamic_Style' ) ) {
             // Remove backslash escapes used to bypass keyword filters (e.g. \65 xpression)
             $css = preg_replace( '/\\\\[0-9a-fA-F]{0,6}\s?/', '', $css );
 
+            // Background images come through as url(). Keep plain http(s) or
+            // root-relative ones and neutralise anything else, rather than
+            // throwing away every style on the block.
+            $css = preg_replace_callback(
+                '/url\s*\(\s*([\'"]?)([^\'")]*)\1\s*\)/i',
+                array( $this, 'sanitize_css_url' ),
+                $css
+            );
+
             // Block dangerous CSS functions and protocols
-            // Covers: expression(), url(), javascript:, vbscript:, data:, behavior
+            // Covers: expression(), stray url(), javascript:, vbscript:, data:, behavior
             if ( preg_match(
                 '/expression\s*\(
-                | url\s*\(
+                | url\s*\((?!"(?:https?:\/\/|\/)[^"]*"\))
                 | javascript\s*:
                 | vbscript\s*:
                 | data\s*:
@@ -127,6 +136,34 @@ if ( ! class_exists( 'Svgib_Block_Dynamic_Style' ) ) {
 
             // Trim and return
             return trim( $css );
+        }
+
+        /**
+         * Rebuild a single url() with a safe, quoted URL, or drop it.
+         *
+         * @since 1.2.0
+         * @param array $matches Regex matches; index 2 is the raw URL.
+         * @return string
+         */
+        private function sanitize_css_url( $matches ) {
+            $url = trim( $matches[2] );
+
+            $is_root_relative = 0 === strpos( $url, '/' ) && 0 !== strpos( $url, '//' );
+            $is_http          = (bool) preg_match( '#^https?://#i', $url );
+
+            if ( ! $is_root_relative && ! $is_http ) {
+                return 'none';
+            }
+
+            $clean = esc_url_raw( $url, array( 'http', 'https' ) );
+            if ( '' === $clean && ! $is_root_relative ) {
+                return 'none';
+            }
+
+            // Quotes and parentheses would let the value break out of url().
+            $clean = str_replace( array( '"', "'", '(', ')', '\\' ), array( '%22', '%27', '%28', '%29', '' ), $is_root_relative ? $url : $clean );
+
+            return 'url("' . $clean . '")';
         }
     }
 

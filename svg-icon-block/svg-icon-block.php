@@ -4,7 +4,7 @@
  * Description: Easily add SVG icons to your Gutenberg block editor with the SVG Icon Block. 
  * Author: Zakaria Binsaifullah
  * Author URI: https://www.makegutenblock.com
- * Version: 1.1.0
+ * Version: 1.2.0
  * Text Domain: svg-icon-block
  * Domain Path: /languages
  * License: GPLv2 or later
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Svgib_Block ' ) ) {
 	final class Svgib_Block {
 
 		// Plugin version
-		const VERSION = '1.1.0';
+		const VERSION = '1.2.0';
 
 		/**
 		 * Svgib Blocks Instance
